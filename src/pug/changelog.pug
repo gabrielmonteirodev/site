@@ -1,0 +1,25 @@
+extends layouts/LayoutComponent
+
+mixin Changelog(config)
+  .card.shadow-none.border.border-300.my-3
+    .card-header.border-bottom.border-300.bg-soft
+      h5.mb-2
+        code.fw-bold.fs-1=config.version
+        |  - #{config.name}
+      p.mb-0=config.date
+    .card-body
+      p!=config.description
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Changelog'
+    }
+
+block component
+  +Changelog({
+    version: 'v1.0.0',
+    name:'Pre Release',
+    date: '24 March, 2022',
+    description: 'Nothing to see here.'
+  })

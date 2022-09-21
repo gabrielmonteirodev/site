@@ -1,0 +1,194 @@
+extends ../layouts/LayoutComponent
+include ../mixins/tables/Tables
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Tables',
+      description: 'Documentation and examples for opt-in styling of tables (given their prevalent use in JavaScript plugins) with Bootstrap.',
+      url: `https://getbootstrap.com/docs/${bootstrapVersion}/content/tables/`,
+      linkText: 'Tables on Bootstrap',
+    }
+  -
+    var rightNav = [
+      {
+        name: 'Overview',
+        id: '#overview',
+      },
+      {
+        name: 'Variants',
+        id: '#variants',
+      },
+      {
+        name: 'Accented tables',
+        id: '#accented-tables',
+        subItem: [
+          {
+            name: 'Striped rows',
+            id: '#striped-rows',
+          },
+          {
+            name: 'Hoverable rows',
+            id: '#hoverable-rows',
+          },
+          {
+            name: 'Active tables',
+            id: '#active-tables',
+          },
+        ]
+      },
+      {
+        name: 'Table Borders',
+        id: '#table-borders',
+        subItem: [
+          {
+            name: 'Bordered tables',
+            id: '#bordered-tables',
+          },
+          {
+            name: 'Table without borders',
+            id: '#table-without-borders'
+          }
+        ]
+      },
+      {
+        name: 'Small Tables',
+        id: '#small-tables'
+      },
+      {
+        name: 'Responsive Tables',
+        id: '#responsive-tables',
+        subItem: [
+          {
+            name: 'Always responsive',
+            id: '#always-responsive',
+          },
+          {
+            name: 'Breakpoint specific',
+            id: '#breakpoint-specific'
+          }
+        ]
+      }
+    ]
+  -
+    var rows = [
+      {
+        name: 'Anna',
+        email: 'anna@example.com',
+        age: 18,
+      },
+      {
+        name: 'Homer',
+        email: 'homer@example.com',
+        age: 35,
+      },
+      {
+        name: 'Oscar',
+        email: 'oscar@example.com',
+        age: 52,
+      },
+      {
+        name: 'Emily',
+        email: 'emily@example.com',
+        age: 30,
+      },
+      {
+        name: 'Jara',
+        email: 'jara@example.com',
+        age: 25,
+      },
+      {
+        name: 'Clark',
+        email: 'clark@example.com',
+        age: 39,
+      },
+      {
+        name: 'Jennifer',
+        email: 'jennifer@example.com',
+        age: 52,
+      },
+      {
+        name: 'Tony',
+        email: 'tony@example.com',
+        age: 30,
+      },
+      {
+        name: 'Tom',
+        email: 'tom@example.com',
+        age: 25,
+      },
+      {
+        name: 'Michael',
+        email: 'michael@example.com',
+        age: 39,
+      },
+      {
+        name: 'Antony',
+        email: 'antony@example.com',
+        age: 39,
+      },
+      {
+        name: 'Raymond',
+        email: 'raymond@example.com',
+        age: 52,
+      },
+      {
+        name: 'Marie',
+        email: 'marie@example.com',
+        age: 30,
+      },
+      {
+        name: 'Cohen',
+        email: 'cohen@example.com',
+        age: 25,
+      },
+      {
+        name: 'Rowen',
+        email: 'rowen@example.com',
+        age: 39,
+      },
+    ]
+block component
+  +ComponentCard({
+    title: 'Table Example',
+    anchor: true,
+    bodyClass:'pt-0',
+  }).mb-3
+    #tableExample(data-list!={
+      valueNames: ['name', 'email', 'age'],
+      page: 5,
+      pagination: true
+    })
+      .table-responsive.scrollbar
+        table.table.table-bordered.table-striped.fs--1.mb-0
+          thead.bg-200.text-900
+            tr
+              th.sort(data-sort="name") Name
+              th.sort(data-sort="email") Email
+              th.sort(data-sort="age") Age
+          tbody.list
+            each row in rows
+              tr
+                td.name=row.name
+                td.email=row.email
+                td.age=row.age
+      .row.align-items-center.mt-3
+        .pagination.d-none
+        .col
+          p.mb-0.fs--1
+            ='\n'
+            span.d-none.d-sm-inline-block(data-list-info)
+            ='\n'
+            span.d-none.d-sm-inline-block  &mdash; 
+            ='\n'
+            a.fw-semi-bold(href='#!' data-list-view="*")
+              | View all
+              span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+            a.fw-semi-bold.d-none(href='#!' data-list-view="less")
+              | View Less
+              span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+        .col-auto.d-flex
+          button.btn.btn-sm.btn-primary(type='button' data-list-pagination='prev')
+            span Previous
+          button.btn.btn-sm.btn-primary.px-4.ms-2(type='button' data-list-pagination='next')
+            span Next
